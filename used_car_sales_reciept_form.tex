@@ -1,0 +1,111 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{hyperref}
+\usepackage{eforms}
+\usepackage{tikz}
+\usepackage{calc} % For arithmetic operations on lengths
+\geometry{top=2cm, bottom=1cm, left=1in, right=1in}
+\pagestyle{empty} % Remove page number
+
+\setmainfont{DejaVu Sans}
+
+% Define a base length for field widths
+\newlength{\basefieldlength}
+\setlength{\basefieldlength}{16.5cm}
+
+% Define the checkbox side size
+\newlength{\checkboxL}
+\setlength{\checkboxL}{0.5cm}
+
+% Define custom lengths for vertical spacing
+\newcommand{\sectionspace}{\vspace{0.8cm}}
+\newcommand{\addressspace}{\vspace{0.4cm}}
+\newcommand{\fieldspace}{\vspace{0.2cm}}
+
+% Custom command to create a form field with vertical spacing and manual width
+\newcommand{\formfield}[3]{%
+  \fieldspace
+  \noindent\textbf{#1:}%
+  \begin{tikzpicture}[baseline=(field.base)]
+    \node[anchor=base west, outer sep=0pt, inner sep=0pt] (field) at (0,0) {\TextField[name=#2, width=\dimexpr\basefieldlength-#3\relax, bordercolor={1 1 1}, charsize=12pt]{}};
+    \draw[black] (field.base west) ++(0,-2pt) -- ++(\dimexpr\basefieldlength-#3\relax,0); % Underline slightly below the field
+  \end{tikzpicture}%
+}
+
+% Custom command to create an address field with vertical spacing and manual width
+\newcommand{\addressfield}[2]{%
+  \addressspace
+  \noindent
+  \begin{tikzpicture}[baseline=(field.base)]
+    \node[anchor=base west, outer sep=0pt, inner sep=0pt] (field) at (0,0) {\TextField[name=#1, width=\dimexpr\basefieldlength-#2\relax, bordercolor={1 1 1}, charsize=12pt]{}};
+    \draw[black] (field.base west) ++(0,-2pt) -- ++(\dimexpr\basefieldlength-#2\relax,0); % Underline slightly below the field
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\begin{center}
+    \Huge \textbf{USED CAR SALES RECEIPT}
+\end{center}
+
+\sectionspace
+\formfield{Date}{date}{1.25cm}
+
+\sectionspace
+\noindent
+\textbf{NAME AND ADDRESS OF SELLER:}
+
+\addressfield{seller_address1}{0cm}
+
+\addressfield{seller_address2}{0cm}
+
+\addressfield{seller_address3}{0cm}
+
+\addressfield{seller_address4}{0cm}
+
+\formfield{Telephone}{seller_telephone}{2.6cm}
+
+\sectionspace
+\noindent
+\textbf{NAME AND ADDRESS OF BUYER:}
+
+\addressfield{buyer_address1}{0cm}
+
+\addressfield{buyer_address2}{0cm}
+
+\addressfield{buyer_address3}{0cm}
+
+\addressfield{buyer_address4}{0cm}
+
+\formfield{Telephone}{buyer_telephone}{2.6cm}
+
+\sectionspace
+\formfield{Vehicle Registration number}{vehicle_registration}{6.9cm}
+
+\formfield{VIN}{vin}{1cm}
+
+\formfield{Make}{make}{1.45cm}
+
+\formfield{Model}{model}{1.6cm}
+
+\formfield{Colour}{colour}{1.7cm}
+
+\formfield{Total}{total}{1.3cm}
+
+\sectionspace
+\noindent
+\CheckBox[name=paid_in_full, width=\checkboxL, height=\checkboxL, bordercolor={0 0 0}]{Paid in full} \hspace{1cm} \CheckBox[name=sold_as_seen, width=\checkboxL, height=\checkboxL, bordercolor={0 0 0}]{Sold As seen}
+
+\sectionspace
+\noindent
+\begin{tikzpicture}
+  \draw (0,0) rectangle (7.5,3);
+  \node[below right] at (0,3) {\textbf{Signature of seller}};
+  \draw (9,0) rectangle (16.5,3);
+  \node[below right] at (9,3) {\textbf{Signature of buyer}};
+\end{tikzpicture}
+
+\end{document}
