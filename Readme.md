@@ -9,7 +9,6 @@ This repository contains a LaTeX-based form for a used car sales receipt. The fo
 - Editable form fields for buyer and seller details
 - Vehicle information fields
 - Checkboxes for "Paid in full" and "Sold As Seen"
-- Options for digital and physical signatures
 - Easy to compile with LuaLaTeX
 
 ## Requirements
